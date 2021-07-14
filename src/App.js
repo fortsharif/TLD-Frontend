@@ -9,13 +9,14 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 function App() {
 
   return <Router>
-
-    <Route exact path="/">
-      <Application></Application>
-    </Route>
-    <Route path="/login">
-      <Login />
-    </Route>
+    <Switch>
+      <Route exact path="/">
+        <Application />
+      </Route>
+      <Route path="/login">
+        <Login />
+      </Route>
+    </Switch>
   </Router>
 }
 

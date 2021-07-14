@@ -18,45 +18,42 @@ const LoginForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log(emailContainer.current.value)
-        console.log(passwordContainer.current.value)
+
         const data = { email: emailContainer.current.value, password: passwordContainer.current.value }
         console.log(JSON.stringify(data))
         const response = await fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Accept': 'application/json'
             },
             body: JSON.stringify(data)
 
         })
         console.log(response)
         const status = await response.status
-        if (status == 500) {
-            console.log('failed login')
+        if (status === 500) {
             const error = await response.json()
             console.log(error)
-
-
-
         }
-        else if (status == 200) {
-            console.log('WOOOP LOGGED IN')
-            const token = await response.json()
-            console.log(token)
+        else if (status === 200) {
+            const data = await response.json()
+            console.log(data.token)
+            localStorage.setItem("token", "Bearer " + data.token)
+            history.push('/')
+        }
+
+    }
+
+    /* useEffect(() => {
+
+
+        if (localStorage.getItem("token")) {
             history.push('/')
         }
 
 
-
-
-    }
-
-    useEffect(() => {
-
-        //emailContainer.current.focus()
-
-    })
+    }, []) */
 
     return <>
         <Container className='mt-5'>

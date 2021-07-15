@@ -7,13 +7,13 @@ import './Login.css'
 
 const url = 'http://localhost:5000/api/v1/user/login'
 
-const LoginForm = () => {
-    const history = useHistory()
+const LoginForm = (props) => {
+    //const history = useHistory()
     const emailContainer = useRef(null)
     const passwordContainer = useRef(null)
 
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [error, setError] = useState(null)
+    const [loading, setLoading] = useState(false)
     const [header, setHeader] = useState('')
 
     const handleSubmit = async (e) => {
@@ -35,25 +35,33 @@ const LoginForm = () => {
         if (status === 500) {
             const error = await response.json()
             console.log(error)
+            setError("Something went wrong, couldn't log you in. Please try again")
         }
         else if (status === 200) {
             const data = await response.json()
             console.log(data.token)
+            console.log(data.type)
+            console.log(data.email)
+
             localStorage.setItem("token", "Bearer " + data.token)
-            history.push('/')
+            localStorage.setItem("email", data.email)
+            localStorage.setItem("type", data.type)
+            props.history.push('/dashboard')
         }
 
     }
 
-    /* useEffect(() => {
+
+
+    useEffect(() => {
 
 
         if (localStorage.getItem("token")) {
-            history.push('/')
+            props.history.push('/dashboard')
         }
 
 
-    }, []) */
+    }, [])
 
     return <>
         <Container className='mt-5'>
@@ -70,6 +78,7 @@ const LoginForm = () => {
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Password:</Form.Label>
                             <Form.Control type="password" placeholder="*********" ref={passwordContainer} />
+                            {error && <p >{error}</p>}
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicCheckbox">
 

@@ -2,16 +2,20 @@ import React, { useState, useEffect, useRef } from 'react'
 import { Redirect } from 'react-router-dom'
 
 
-
 const Applications = (props) => {
 
-    let url = 'http://localhost:5000/api/v1/applications'
-    /* const [admin, setAdmin] = useState(false) */
-    const [applications, setApplications] = useState([])
 
+    /* const [admin, setAdmin] = useState(false) */
+    const [url, setUrl] = useState('http://localhost:5000/api/v1/applications')
+    const [applications, setApplications] = useState([])
+    const [current, setCurrent] = useState(0)
+    const [total, setTotal] = useState(0)
+    const [page, setPage] = useState(0)
+    const [loaded, setLoaded] = useState(false)
     const token = localStorage.getItem('token')
 
-    const getApplications = async () => {
+    const getApplications = async (page) => {
+        let url = `http://localhost:5000/api/v1/applications?page=${page}`
         const response = await fetch(url, {
             method: 'GET',
             headers: {
@@ -24,15 +28,28 @@ const Applications = (props) => {
         }
 
         const applications = await response.json()
-        setApplications(applications.applications)
+
+
+        setTotal(() => applications.total_results)
+
+        setCurrent(() => applications.current_item)
+        setApplications(() => applications.applications)
+
+
+        console.log(total)
+        console.log(current)
+
+
     }
 
 
 
     useEffect(() => {
-        getApplications()
 
-    }, [url])
+        getApplications(page)
+
+
+    }, [page])
 
 
     return (
@@ -53,7 +70,23 @@ const Applications = (props) => {
                     </li>
                 })}
             </ul>
-            <h1>hehe</h1>
+            {page > 0 ?
+                <button type='button' onClick={() => {
+                    setPage((page) => page - 1)
+                    //getApplications(page)
+
+
+                }}>Back</button> : <button type="button" disabled>Back</button>
+
+            }
+            {current - total <= 0 ?
+                <button type='button' onClick={() => {
+                    setPage((page) => page + 1)
+                    //getApplications(page)
+
+
+                }}>Next</button> : <button type="button" disabled>Next</button>
+            }
         </>
     )
 

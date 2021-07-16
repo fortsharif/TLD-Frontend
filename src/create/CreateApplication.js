@@ -2,8 +2,7 @@ import React, { useRef, useEffect } from 'react'
 import { Button, Col, Container, Form, Row } from 'react-bootstrap'
 import './CreateApplication.css'
 import { withRouter } from 'react-router-dom';
-import fs from 'fs'
-import path from 'path'
+
 const url = 'http://localhost:5000/api/v1/applications'
 
 const CreateApplication = (props) => {
@@ -78,11 +77,7 @@ const CreateApplication = (props) => {
 
                         </Form.Group>
 
-                        <Form.Group className="mb-3" controlId="formBasicText">
-                            <Form.Label>Image of property:</Form.Label>
-                            <Form.Control type="file" ref={imageContainer} />
 
-                        </Form.Group>
 
                         <Button variant="dark" type="submit">
                             Create

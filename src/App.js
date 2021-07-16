@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Login from './login/Login'
 import Applications from './applications/Applications'
 import Dashboard from './dashboard/Dashboard'
+import CreateApplication from './create/CreateApplication'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
       <Route exact path="/applications" component={Applications} />
       <Route exact path="/dashboard" component={Dashboard} />
       <Route exact path="/login" component={Login} />
+      <Route exact path="/create" component={CreateApplication} />
     </Switch>
   </Router>
 }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { Redirect, Route } from "react-router-dom"
+import CreateApplication from "../create/CreateApplication"
 
 
 
@@ -14,6 +15,10 @@ const Dashboard = (props) => {
 
     const gotoApplications = () => {
         props.history.push('/applications')
+    }
+
+    const CreateApplication = () => {
+        props.history.push('/create')
     }
 
     const [admin, setAdmin] = useState(false)
@@ -37,7 +42,7 @@ const Dashboard = (props) => {
                 <button type='button' onClick={gotoApplications}>Check applications</button>
             </div>
 
-                : <p> you are not an admin</p>}
+                : <button type='button' onClick={CreateApplication}>Start An Application</button>}
 
             <button type='button' onClick={logout}>Logout</button>
         </>

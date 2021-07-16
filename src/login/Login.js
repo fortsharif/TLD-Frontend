@@ -13,8 +13,6 @@ const LoginForm = (props) => {
     const passwordContainer = useRef(null)
 
     const [error, setError] = useState(null)
-    const [loading, setLoading] = useState(false)
-    const [header, setHeader] = useState('')
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -75,7 +73,7 @@ const LoginForm = (props) => {
 
                         </Form.Group>
 
-                        <Form.Group className="mb-3" controlId="formBasicPassword">
+                        <Form.Group className="mb-3" controlId="formBasicPasswod">
                             <Form.Label>Password:</Form.Label>
                             <Form.Control type="password" placeholder="*********" ref={passwordContainer} />
                             {error && <p >{error}</p>}
@@ -83,8 +81,8 @@ const LoginForm = (props) => {
                         <Form.Group className="mb-3" controlId="formBasicCheckbox">
 
                         </Form.Group>
-                        <Button variant="primary" type="submit">
-                            Submit
+                        <Button variant="dark" type="submit">
+                            Log in
                         </Button>
                     </Form>
                 </Col>

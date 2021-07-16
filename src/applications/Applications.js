@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Redirect } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 
 const Applications = (props) => {
@@ -92,4 +92,4 @@ const Applications = (props) => {
 
 }
 
-export default Applications
+export default withRouter(Applications)

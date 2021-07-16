@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
-import { Redirect, Route } from "react-router-dom"
+import { BrowserRouter as Redirect, Route } from "react-router-dom"
 import CreateApplication from "../create/CreateApplication"
-
+import { withRouter } from 'react-router-dom';
 
 
 const Dashboard = (props) => {
@@ -17,7 +17,13 @@ const Dashboard = (props) => {
         props.history.push('/applications')
     }
 
+    const viewApplication = () => {
+        props.history.push('/myapplication')
+        {/* < Redirect to="/myapplication" /> */ }
+    }
+
     const CreateApplication = () => {
+
         props.history.push('/create')
     }
 
@@ -33,6 +39,7 @@ const Dashboard = (props) => {
         if (!email) {
             props.history.push('/login')
         }
+
     }, [])
 
     return (
@@ -43,11 +50,16 @@ const Dashboard = (props) => {
             </div>
 
                 : <button type='button' onClick={CreateApplication}>Start An Application</button>}
+            {
+                admin ? <h1></h1> : < button type='button' onClick={viewApplication}>View Your Application</button>
 
+            }
+
+            <br></br>
             <button type='button' onClick={logout}>Logout</button>
         </>
     )
 
 }
 
-export default Dashboard
+export default withRouter(Dashboard)

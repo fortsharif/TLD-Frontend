@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import { Button, Col, Container, Form, Row } from 'react-bootstrap'
 import { BrowserRouter as Redirect } from 'react-router-dom'
 import { useHistory } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
 import icon from './user.png'
 import './Login.css'
 
@@ -104,4 +105,4 @@ const LoginForm = (props) => {
 
 }
 
-export default LoginForm
+export default withRouter(LoginForm)

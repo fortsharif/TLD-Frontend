@@ -31,7 +31,7 @@ const MyApplication = (props) => {
         if (status === 200) {
             const data = await response.json()
             console.log(data)
-            setApplication(data)
+            setApplication(() => data)
             setLoading(false)
         }
         else {
@@ -43,7 +43,7 @@ const MyApplication = (props) => {
     useEffect(() => {
         getApplication()
 
-    }, [])
+    }, [email])
 
     return (<>
         {loading ? <div className="hmm"><h1>No applications to see</h1><br></br>

@@ -10,7 +10,7 @@ const MyApplication = (props) => {
     const email = localStorage.getItem('email')
     const [application, setApplication] = useState({})
     const [loading, setLoading] = useState(true)
-    const [image, setImage] = useState(process.env.PUBLIC_URL + `/${email}.png`)
+    const [image, setImage] = useState(`http://localhost:5000/${email}.jpg`)
 
     const back = () => {
         props.history.push('/dashboard')

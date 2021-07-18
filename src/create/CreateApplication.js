@@ -59,7 +59,7 @@ const CreateApplication = (props) => {
 
     useEffect(() => {
         if (!email) {
-            props.history.push('/login')
+            props.history.push('/')
         }
     }, [])
 

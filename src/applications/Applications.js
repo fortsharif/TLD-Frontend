@@ -28,7 +28,7 @@ const Applications = (props) => {
         const data = { email: email, status: update }
 
         const response = await fetch(url, {
-            method: 'POST',
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',

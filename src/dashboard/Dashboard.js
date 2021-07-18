@@ -44,10 +44,11 @@ const Dashboard = (props) => {
 
     return (
         <>
-            <h1 className='dashboard'>Welcome to The License Department<br></br> <br></br> <br></br>this is your dashboard, you can create new applications here or view your current application</h1>
+            {!admin ? <h1 className='dashboard'>Welcome to The License Department<br></br> <br></br> <br></br>this is your dashboard, you can create new applications here or view your current application</h1> : <h1 className='dashboard'>Welcome to The License Department<br></br> <br></br> <br></br>this is your dashboard, you are an admin, check out the applications</h1>
+            }
             <div className='hmm'>
                 <h1>Please click the following buttons: {email}</h1>
-                {admin ? <div><p>You are an admin, check out the applications</p>
+                {admin ? <div><p></p>
                     <Button className='button' variant='dark' onClick={gotoApplications}>Check applications</Button>
                 </div>
 

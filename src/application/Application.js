@@ -52,7 +52,7 @@ const MyApplication = (props) => {
                 <Card.Header>{loading ? <h1>hehe</h1> : application.status.toUpperCase()}</Card.Header>
                 <Card.Img variant="top" src={image} />
                 <Card.Body>
-                    <Card.Title>Status of your application</Card.Title>
+                    <Card.Title>Status of your application:</Card.Title>
                     <Card.Text>
                         Hello, {application.name} your application status is currently; {application.status}. More information about what you submitted with your application can be found below...
                     </Card.Text>

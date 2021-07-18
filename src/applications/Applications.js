@@ -12,6 +12,7 @@ const Applications = (props) => {
     const [image, setImage] = useState(null)
     const [current, setCurrent] = useState(0)
     const [total, setTotal] = useState(0)
+    const [email, setEmail] = useState(null)
     const [page, setPage] = useState(0)
     const [loading, setLoaded] = useState(false)
     const token = localStorage.getItem('token')
@@ -20,9 +21,30 @@ const Applications = (props) => {
     const updateContainer = useRef(null)
     const userContainer = useRef(null)
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
+
         e.preventDefault()
-        console.log(update)
+        let url = `http://localhost:5000/api/v1/applications/update`
+        const data = { email: email, status: update }
+
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': token
+            },
+            body: JSON.stringify(data)
+        })
+
+        const status = await response.status
+
+        if (status === 401) {
+            props.history.push('/dashboard')
+        } else {
+            await getApplications(0)
+        }
+
 
     }
 
@@ -178,20 +200,33 @@ const Applications = (props) => {
                                 <Card.Img variant="top" src={`http://localhost:5000/${application.user_id}.jpg`} height='200px' width='100px' />
                                 <Card.Body>
                                     <Card.Title>Status of this application:</Card.Title>
-                                    <Form onSubmit={() => handleSubmit()}>
+                                    <Form onSubmit={(e) => handleSubmit(e)}>
                                         <Form.Group className="mb-3" controlId="formBasicPasswod">
                                             <Form.Label>Pending</Form.Label>
-                                            <Form.Check type="radio" onChange={(e) => setUpdate(e.target.value)} name="radio" value="pending" />
+                                            <Form.Check type="radio" onChange={(e) => {
+                                                setUpdate(e.target.value)
+                                                setEmail(application.user_id)
+                                            }
+                                            }
+                                                name="radio" value="pending" />
 
                                         </Form.Group>
                                         <Form.Group className="mb-3" controlId="formBasicPasswod">
                                             <Form.Label>Accepted</Form.Label>
-                                            <Form.Check type="radio" onChange={(e) => setUpdate(e.target.value)} name="radio" value="accepted" />
+                                            <Form.Check type="radio" onChange={(e) => {
+                                                setUpdate(e.target.value)
+                                                setEmail(application.user_id)
+                                            }
+                                            } name="radio" value="accepted" />
 
                                         </Form.Group>
                                         <Form.Group className="mb-3" controlId="formBasicPasswod">
                                             <Form.Label>Rejected</Form.Label>
-                                            <Form.Check type="radio" onChange={(e) => setUpdate(e.target.value)} name="radio" value="rejected" />
+                                            <Form.Check type="radio" onChange={(e) => {
+                                                setUpdate(e.target.value)
+                                                setEmail(application.user_id)
+                                            }
+                                            } name="radio" value="rejected" />
 
                                         </Form.Group>
                                         <Button variant="dark" type="submit">

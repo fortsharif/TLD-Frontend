@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# The License Department
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a react front-end application for the TLD back-end found (https://github.com/fortsharif/back-end-TLD)
 
 ## Available Scripts
 
